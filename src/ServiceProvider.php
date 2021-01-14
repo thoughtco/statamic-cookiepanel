@@ -35,9 +35,15 @@ class ServiceProvider extends AddonServiceProvider
     
         // after install we need to copy our global
         Statamic::afterInstalled(function ($command) {
-            $original = __DIR__.'/resources/blueprints/cookie_panel.yaml';
+            
+            $original = __DIR__.'/../resources/blueprints/cookie_panel.yaml';
             $yaml = YAML::file($original)->parse();
             File::put(resource_path('blueprints/globals/cookie_panel.yaml'), YAML::dump($yaml));
+            
+            $original = __DIR__.'/../resources/content/cookie_panel.yaml';
+            $yaml = YAML::file($original)->parse();
+            File::put(base_path('content/globals/cookie_panel.yaml'), YAML::dump($yaml));
+            
         });
     }
 }
