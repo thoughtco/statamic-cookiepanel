@@ -60,6 +60,14 @@ sections:
                     icon: text
                     listable: hidden
                 -
+                  handle: slug
+                  field:
+                    generate: true
+                    display: Slug
+                    type: slug
+                    icon: slug
+                    listable: hidden
+                -
                   handle: description
                   field:
                     antlers: false
