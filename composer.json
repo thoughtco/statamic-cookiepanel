@@ -1,0 +1,28 @@
+{
+    "name": "thoughtco/cookiepanel",
+    "description": "Cookie Panel",
+    "autoload": {
+        "psr-4": {
+            "Thoughtco\\CookiePanel\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ryan Mitchell"
+        }
+    ],
+    "support": {
+        "email": "help@thoughtcollective.com"
+    },
+    "extra": {
+        "statamic": {
+            "name": "Cookie Panel",
+            "description": "Adds a sidebar Cookie Panel functionality to your site, and tags for displaying a cookie table"
+        },
+        "laravel": {
+            "providers": [
+                "Thoughtco\\CookiePanel\\ServiceProvider"
+            ]
+        }
+    }
+}
