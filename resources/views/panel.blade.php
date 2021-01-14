@@ -19,7 +19,7 @@
         
             @if ($group['show_toggle'])
         <div class="toggler">
-            <input type="checkbox" data-cookiepanel="category" value="analytics" id="thoughtco-cookiepanel-{{ $loop->index }}" />
+            <input type="checkbox" data-cookiepanel="category" value="{{ $group['slug'] }}" id="thoughtco-cookiepanel-{{ $loop->index }}" @if(in_array($group['slug'], $cookie)) checked @endif />
             <label for="thoughtco-cookiepanel-{{ $loop->index }}">Enabled</label>
             <label for="thoughtco-cookiepanel-{{ $loop->index }}">Disabled</label>
         </div>

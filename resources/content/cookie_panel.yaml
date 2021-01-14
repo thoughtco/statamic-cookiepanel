@@ -9,18 +9,21 @@ data:
       show_toggle: false
       type: new_set
       enabled: true
+      slug: functional
     -
       title: 'Analytics cookies'
       description: 'Analytical cookies help us to improve our website by collecting and reporting information on its usage.'
       show_toggle: true
       type: new_set
       enabled: true
+      slug: analytics
     -
       title: 'Third-Party Cookies'
       description: 'These cookies are set by a website other than the website you are visiting usually as a result of some embedded content such as a video, a social media share or a like button or a contact map'
       show_toggle: true
       type: new_set
       enabled: true
+      slug: third-party
   cookie_table:
     -
       title: 'Functional cookies'

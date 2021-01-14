@@ -20,9 +20,10 @@ class CookiePanel extends Tags
         $panelData = GlobalSet::findByHandle('cookie_panel')
             ->inCurrentSite()
             ->data();
-      
+                  
         return view('cookiepanel::panel', [
             'openPanel' => $cookie === false,
+            'cookie' => $cookie === false ? [] : json_decode($cookie),
             'data' => $panelData,
         ]);
     }
