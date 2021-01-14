@@ -43,7 +43,7 @@
             for (var i=0; i<categoryEls.length; i++)
                 if (categoryEls[i].checked)
                     selectedCategories.push(categoryEls[i].value);
-                    
+                  
             var data = new FormData();
             data.append('_token', cookiePanel.querySelector('[name="_token"]').value);
             data.append('categories', selectedCategories.join(','));
