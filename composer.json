@@ -1,6 +1,6 @@
 {
-    "name": "thoughtco/cookiepanel",
-    "description": "Cookie Panel",
+    "name": "thoughtco/statamic-cookiepanel",
+    "description": "Cookie Panel for a Statamic v3 site",
     "autoload": {
         "psr-4": {
             "Thoughtco\\CookiePanel\\": "src"

@@ -20,28 +20,12 @@ Provides:
 {{ cookie_panel:cookie_table }}
 ```
 
-Download to App/Addons/CookiePolicy
-
-In your project root’s composer.json, add the package to the require and repositories sections, like so:
+To install:
 
 ```
-{
-    ...
-
-    "require": {
-        ...,
-        "thoughtco/cookiepanel": "*"
-    },
-
-    ...
-
-    "repositories": [
-        {
-            "type": "path",
-            "url": "app/Addons/CookiePanel"
-        }
-    ]
+composer require thoughtco/statamic-cookiepanel
 ```
 
 Then run `composer update`
+
 
