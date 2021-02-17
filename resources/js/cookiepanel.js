@@ -67,7 +67,7 @@
             data.append('_token', cookiePanel.querySelector('[name="_token"]').value);
             data.append('categories', selectedCategories.join(','));
 
-            fetch('/!/cookiepanel', {
+            fetch('/!/statamic-cookiepanel', {
                 method: 'POST',
     		    body: data,
     		    headers: {
