@@ -67,13 +67,15 @@ class CookiePanel extends Tags
      *
      * @return boolen
      */
-    public function hasConsentedTo($type = 'functional')
+    public function hasConsentedTo()
     {
         $cookie = Request::cookie('tc_cookie_policy', false);
 
         // we don't have the cookie policy
         if (!$cookie)
             return false;
+
+        $type = $this->params->get('type', 'functional');
 
         $consentedTo = json_decode($cookie);
 

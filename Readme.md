@@ -5,7 +5,7 @@ Add on for Statamic to add a cookie panel
 Provides:
 
 ```
-{{ if {cookie_panel hasConsentedTo="group-name"} }}
+{{ if {cookie_panel:has_consented_to type="group-name"} }}
 ```
 ```
 {{ cookie_panel:panel }}
