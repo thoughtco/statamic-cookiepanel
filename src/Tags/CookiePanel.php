@@ -15,6 +15,9 @@ class CookiePanel extends Tags
      */
     public function panel()
     {
+        if (Request::hasHeader('X-Statamic-Live-Preview'))
+            return '';
+
         $cookie = Request::cookie('tc_cookie_policy', false);
 
         $panelData = GlobalSet::findByHandle('cookie_panel')
