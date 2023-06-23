@@ -16,6 +16,7 @@
     background-color: rgb(40, 40, 40);
     color: #fff;
     padding: 8px 10px;
+    z-index: 10000000;
 }
 
 .thoughtco-cookiepanel .cookiepanel-sidebar {
@@ -93,7 +94,7 @@
 
 .thoughtco-cookiepanel .buttons button {
     background-color: rgba(255, 255, 255, 0.5);
-    padding: 8px 12px;  
+    padding: 8px 12px;
     border-radius: 8px;
 }
 
