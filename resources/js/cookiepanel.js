@@ -1,4 +1,4 @@
-(function(){
+window.addEventListener('DOMContentLoaded', function(){
 
     // Detect if user is on IE browser
     var isIE = !!window.MSInputMethodContext && !!document.documentMode;
@@ -83,4 +83,4 @@
         cookiePanel.addEventListener('click', clickAndInputHandler);
     }
 
-}());
+});
