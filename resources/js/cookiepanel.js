@@ -25,11 +25,18 @@ window.addEventListener('DOMContentLoaded', function(){
         var clickAndInputHandler = function(event) {
 
 			var target = event.target;
+
+            // if we are a checkbox
+            if (target.closest('.toggler')) {
+                return;
+            }
+
             var categoryEls = cookiePanel.querySelectorAll('input[type="checkbox"]');
 
             var attr = target.getAttribute('data-cookiepanel');
-            if (!attr)
+            if (!attr) {
                 return;
+            }
 
             var autoClose = false;
             switch (attr) {
@@ -40,7 +47,6 @@ window.addEventListener('DOMContentLoaded', function(){
 
                 case 'close':
                     cookiePanel.classList.remove('open');
-                    return;
                 break;
 
                 case 'reject':
@@ -59,9 +65,11 @@ window.addEventListener('DOMContentLoaded', function(){
             }
 
             var selectedCategories = [];
-            for (var i=0; i<categoryEls.length; i++)
-                if (categoryEls[i].checked)
+            for (var i=0; i<categoryEls.length; i++) {
+                if (categoryEls[i].checked) {
                     selectedCategories.push(categoryEls[i].value);
+                }
+            }
 
             var data = new FormData();
             data.append('_token', cookiePanel.querySelector('[name="_token"]').value);
@@ -75,9 +83,15 @@ window.addEventListener('DOMContentLoaded', function(){
     		    },
             });
 
-            if (autoClose)
+            if (autoClose) {
                 cookiePanel.classList.remove('open');
+            }
 
+            window.dispatchEvent(new CustomEvent('statamic-cookiepanel:consent-changed', {
+                detail: {
+                    categories: selectedCategories,
+                }
+            }));
         };
 
         cookiePanel.addEventListener('click', clickAndInputHandler);
