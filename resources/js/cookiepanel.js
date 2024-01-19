@@ -104,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         for (const child of el.children) {
                             let newChild = child.cloneNode(true);
                             newChild.setAttribute('data-consentpanel-ouput', id);
-                            el.insertAdjacentHTML(newChild);
+                            el.insertAdjacentHTML('afterend', newChild);
                         }
                     }
 
