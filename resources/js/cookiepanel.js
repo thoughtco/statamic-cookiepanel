@@ -1,10 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
 
     const ConsentPanel = class {
-        panelElement: null,
-
         constructor(el) {
-            if (el) {
+            if (! el) {
                 console.error('Consent panel element not found');
                 return;
             }
@@ -30,25 +28,25 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             this.updateScriptConsent(selectedCategories);
-        },
+        }
 
-        clickAndInputHandler: (event) => {
+        clickAndInputHandler (event) {
 
-			var target = event.target;
+			let target = event.target;
 
             // if we are a checkbox
             if (target.closest('.toggler')) {
                 return;
             }
 
-            var categoryEls = this.panelElement.querySelectorAll('input[type="checkbox"]');
+            let categoryEls = this.panelElement.querySelectorAll('input[type="checkbox"]');
 
-            var attr = target.getAttribute('data-consentpanel');
+            let attr = target.getAttribute('data-consentpanel');
             if (!attr) {
                 return;
             }
 
-            var autoClose = false;
+            let autoClose = false;
             switch (attr) {
                 case 'open':
                     this.panelElement.classList.add('open');
@@ -60,22 +58,22 @@ window.addEventListener('DOMContentLoaded', () => {
                 break;
 
                 case 'reject':
-                    for (var i=0; i<categoryEls.length; i++)
+                    for (let i=0; i<categoryEls.length; i++)
                         categoryEls[i].checked = false;
 
                     autoClose = true;
                 break;
 
                 case 'accept':
-                    for (var i=0; i<categoryEls.length; i++)
+                    for (let i=0; i<categoryEls.length; i++)
                         categoryEls[i].checked = true;
 
                     autoClose = true;
                 break;
             }
 
-            var selectedCategories = [];
-            for (var i=0; i<categoryEls.length; i++) {
+            let selectedCategories = [];
+            for (let i=0; i<categoryEls.length; i++) {
                 if (categoryEls[i].checked) {
                     selectedCategories.push(categoryEls[i].value);
                 }
@@ -92,9 +90,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     categories: selectedCategories,
                 }
             }));
-        },
+        }
 
-        updateScriptConsent: (categories) => {
+        updateScriptConsent (categories) {
             [].forEach.call(document.querySelectorAll('[data-consentpanel-consent-type]'), (el) => {
                 let id = el.getAttribute('data-consentpanel-id');
 
@@ -104,7 +102,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 // consented
                 if (categories.includes(el.getAttribute('data-consentpanel-consent-type'))) {
-                    if (! document.querySelector('[data-consentpanel-output="' + id + '"]') {
+                    if (! document.querySelector('[data-consentpanel-output="' + id + '"]')) {
                         for (const child of el.children) {
                             let newChild = child.cloneNode(true);
                             newChild.setAttribute('data-consentpanel-ouput', id);
@@ -116,13 +114,13 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // not consented
-                if (document.querySelector('[data-consentpanel-output="' + id + '"]') {
+                if (document.querySelector('[data-consentpanel-output="' + id + '"]')) {
                     [].forEach.call(document.querySelectorAll('[data-consentpanel-output="' + id + '"]'), (el) => {
                         el.parentNode.removeChild(el);
                     });
                 }
             });
-        },
+        }
     };
 
     window.ConsentPanel = new ConsentPanel(document.querySelector('.thoughtco-cookiepanel'));
