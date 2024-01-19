@@ -15,10 +15,9 @@ class CookiePanel extends Tags
      */
     public function panel()
     {
-        if (Request::hasHeader('X-Statamic-Live-Preview'))
+        if (Request::hasHeader('X-Statamic-Live-Preview')) {
             return '';
-
-        $cookie = Request::cookie('tc_cookie_policy', false);
+        }
 
         $panelData = GlobalSet::findByHandle('cookie_panel')
             ->inCurrentSite()
@@ -26,7 +25,6 @@ class CookiePanel extends Tags
 
         return view('statamic-cookiepanel::panel', [
             'openPanel' => $cookie === false,
-            'cookie' => $cookie === false ? [] : json_decode($cookie),
             'data' => $panelData,
         ]);
     }
@@ -72,20 +70,6 @@ class CookiePanel extends Tags
      */
     public function hasConsentedTo()
     {
-        $cookie = Request::cookie('tc_cookie_policy', false);
-
-        // we don't have the cookie policy
-        if (!$cookie)
-            return false;
-
-        $type = $this->params->get('type', 'functional');
-
-        $consentedTo = json_decode($cookie);
-
-        // if we have none then we dont consent
-        if (in_array('none', $consentedTo))
-            return false;
-
-        return in_array($type, $consentedTo);
+        return '<template data-cookiepanel-consent-type="'.$this->params->get('type', 'functional').'" data-cookiepanel="'.uniqid().'">'.$this->parse().'</template>';
     }
 }

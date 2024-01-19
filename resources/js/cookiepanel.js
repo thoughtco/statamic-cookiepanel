@@ -1,28 +1,30 @@
-window.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('DOMContentLoaded', () => {
 
-    // Detect if user is on IE browser
-    var isIE = !!window.MSInputMethodContext && !!document.documentMode;
+    const ConsentPanel = class {
+        panelElement: null,
 
-    // ie requires promise + fetch polyfills
-    if (isIE) {
-        var promiseScript = document.createElement("script");
-        promiseScript.type = "text/javascript";
-        promiseScript.src =
-            "https://cdn.jsdelivr.net/npm/promise-polyfill@8.1.3/dist/polyfill.min.js";
+        constructor(el) {
+            if (el) {
+                console.error('Consent panel element not found');
+                return;
+            }
 
-        var fetchScript = document.createElement("script");
-        fetchScript.type = "text/javascript";
-        fetchScript.src =
-            "https://cdn.jsdelivr.net/npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js";
+            this.panelElement = el;
 
-        document.head.appendChild(promiseScript);
-        document.head.appendChild(fetchScript);
-    }
+            this.panelElement.addEventListener('click', this.clickAndInputHandler);
 
-    var cookiePanel;
-    if (cookiePanel = document.querySelector('.thoughtco-cookiepanel')) {
+            let selectedCategories = localStorage.getItem('consent_settings')?.split(',');
 
-        var clickAndInputHandler = function(event) {
+            [].forEach.call(this.panelElement.querySelectorAll('input[type="checkbox"]'), (el) => {
+                if (selectedCategories.includes(el.value)) {
+                    el.checked = true;
+                }
+            });
+
+            this.updateScriptConsent(selectedCategories);
+        },
+
+        clickAndInputHandler: (event) => {
 
 			var target = event.target;
 
@@ -31,9 +33,9 @@ window.addEventListener('DOMContentLoaded', function(){
                 return;
             }
 
-            var categoryEls = cookiePanel.querySelectorAll('input[type="checkbox"]');
+            var categoryEls = this.panelElement.querySelectorAll('input[type="checkbox"]');
 
-            var attr = target.getAttribute('data-cookiepanel');
+            var attr = target.getAttribute('data-consentpanel');
             if (!attr) {
                 return;
             }
@@ -41,12 +43,12 @@ window.addEventListener('DOMContentLoaded', function(){
             var autoClose = false;
             switch (attr) {
                 case 'open':
-                    cookiePanel.classList.add('open');
+                    this.panelElement.classList.add('open');
                     return;
                 break;
 
                 case 'close':
-                    cookiePanel.classList.remove('open');
+                    this.panelElement.classList.remove('open');
                 break;
 
                 case 'reject':
@@ -71,30 +73,49 @@ window.addEventListener('DOMContentLoaded', function(){
                 }
             }
 
-            var data = new FormData();
-            data.append('_token', cookiePanel.querySelector('[name="_token"]').value);
-            data.append('categories', selectedCategories.join(','));
-
-            fetch('/!/statamic-cookiepanel', {
-                method: 'POST',
-    		    body: data,
-    		    headers: {
-    		        'X-Requested-With': 'XMLHttpRequest'
-    		    },
-            });
+            localStorage.setItem('consent_settings', selectedCategories.join(','));
 
             if (autoClose) {
-                cookiePanel.classList.remove('open');
+                this.panelElement.classList.remove('open');
             }
 
-            window.dispatchEvent(new CustomEvent('statamic-cookiepanel:consent-changed', {
+            window.dispatchEvent(new CustomEvent('statamic-consentpanel:consent-changed', {
                 detail: {
                     categories: selectedCategories,
                 }
             }));
-        };
+        },
 
-        cookiePanel.addEventListener('click', clickAndInputHandler);
-    }
+        updateScriptConsent: (categories) => {
+            [].forEach.call(document.querySelectorAll('[data-consentpanel-consent-type]'), (el) => {
+                let id = el.getAttribute('data-consentpanel-id');
 
+                if (! id) {
+                    return;
+                }
+
+                // consented
+                if (categories.includes(el.getAttribute('data-consentpanel-consent-type'))) {
+                    if (! document.querySelector('[data-consentpanel-output="' + id + '"]') {
+                        for (const child of el.children) {
+                            let newChild = child.cloneNode(true);
+                            newChild.setAttribute('data-consentpanel-ouput', id);
+                            el.insertAdjacentHTML(newChild);
+                        }
+                    }
+
+                    return;
+                }
+
+                // not consented
+                if (document.querySelector('[data-consentpanel-output="' + id + '"]') {
+                    [].forEach.call(document.querySelectorAll('[data-consentpanel-output="' + id + '"]'), (el) => {
+                        el.parentNode.removeChild(el);
+                    });
+                }
+            });
+        },
+    };
+
+    window.ConsentPanel = new ConsentPanel(document.querySelector('.thoughtco-cookiepanel'));
 });
