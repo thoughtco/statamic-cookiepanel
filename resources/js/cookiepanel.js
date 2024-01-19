@@ -21,6 +21,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            if (! selectedCategories.length) {
+                this.panelElement.classList.add('open');
+            }
+
             this.updateScriptConsent(selectedCategories);
         },
 

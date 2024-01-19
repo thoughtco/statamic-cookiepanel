@@ -1,5 +1,4 @@
-<div class="thoughtco-cookiepanel @if($openPanel) open @endif">
-    @csrf
+<div class="thoughtco-cookiepanel">
     <button class="cookiepanel-open" data-consentpanel="open">{{ $data['button_text'] }}</button>
     <div class="cookiepanel-overlay"></div>
     <div class="cookiepanel-sidebar">

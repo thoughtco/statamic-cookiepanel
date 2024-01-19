@@ -24,7 +24,6 @@ class CookiePanel extends Tags
             ->data();
 
         return view('statamic-cookiepanel::panel', [
-            'openPanel' => $cookie === false,
             'data' => $panelData,
         ]);
     }
