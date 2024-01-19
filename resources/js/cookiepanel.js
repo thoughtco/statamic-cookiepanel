@@ -25,6 +25,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 this.panelElement.classList.add('open');
             }
 
+            if (! selectedCategories.includes('functional')) {
+                selectedCategories.push('functional');
+            }
+
             this.updateScriptConsent(selectedCategories);
         },
 
