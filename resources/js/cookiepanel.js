@@ -11,19 +11,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
             this.panelElement.addEventListener('click', this.clickAndInputHandler.bind(this));
 
-            let selectedCategories = localStorage.getItem('consent_settings')?.split(',');
+            let selectedCategories = this.getConsentSettings();
 
             [].forEach.call(this.panelElement.querySelectorAll('input[type="checkbox"]'), (el) => {
-                if (selectedCategories && selectedCategories.includes(el.value)) {
+                if (selectedCategories.includes(el.value)) {
                     el.checked = true;
                 }
             });
 
-            if (! selectedCategories) {
+            if (! selectedCategories.length) {
                 this.panelElement.classList.add('open');
             }
 
-            if (selectedCategories && ! selectedCategories.includes('functional')) {
+            if (! selectedCategories.includes('functional')) {
                 selectedCategories.push('functional');
             }
 
@@ -97,7 +97,15 @@ window.addEventListener('DOMContentLoaded', () => {
             }));
         }
 
-        updateScriptConsent (categories) {
+        getConsentSettings() {
+            return localStorage.getItem('consent_settings')?.split(',') ?? [];
+        }
+
+        hasConsentedTo(category) {
+            return this.getConsentSettings().includes(category);
+        }
+
+        updateScriptConsent(categories) {
             [].forEach.call(document.querySelectorAll('[data-consentpanel-type]'), (el) => {
                 let id = el.getAttribute('data-consentpanel-id');
 
