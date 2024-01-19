@@ -13,8 +13,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
             let selectedCategories = localStorage.getItem('consent_settings')?.split(',');
 
-            console.log(selectedCategories);
-
             [].forEach.call(this.panelElement.querySelectorAll('input[type="checkbox"]'), (el) => {
                 if (selectedCategories && selectedCategories.includes(el.value)) {
                     el.checked = true;
