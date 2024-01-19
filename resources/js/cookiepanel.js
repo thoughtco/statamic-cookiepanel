@@ -38,6 +38,10 @@ window.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            if (event.target.tagName.toLowerCase() == 'input') {
+                return;
+            }
+
             let autoClose = false;
             switch (attr) {
                 case 'open':
@@ -47,6 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 case 'close':
                     this.panelElement.classList.remove('open');
+                    return;
                 break;
 
                 case 'reject':
@@ -64,6 +69,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     autoClose = true;
                 break;
+
+                case 'select':
+                    autoClose = true;
+                break;
             }
 
             let selectedCategories = [];
@@ -78,6 +87,8 @@ window.addEventListener('DOMContentLoaded', () => {
             if (autoClose) {
                 this.panelElement.classList.remove('open');
             }
+
+            this.updateScriptConsent(selectedCategories);
 
             window.dispatchEvent(new CustomEvent('statamic-consentpanel:consent-changed', {
                 detail: {

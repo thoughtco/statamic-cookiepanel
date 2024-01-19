@@ -7,17 +7,6 @@
 
         {!! $data['introduction'] !!}
 
-        <div class="buttons">
-            <button type="button" data-consentpanel="accept">Accept all</button>
-            @php $rejectShown = false; @endphp
-            @foreach ($data['cookie_groups'] as $group)
-                @if (!$rejectShown && $group['enabled'] && $group['show_toggle'])
-            <button type="button" data-consentpanel="reject">Reject all</button>
-                    @php $rejectShown = true; @endphp
-                @endif
-            @endforeach
-        </div>
-
         @foreach ($data['cookie_groups'] as $group)
             @if ($group['enabled'])
         <p class="heading">{{ $group['title'] }}</p>
@@ -32,6 +21,18 @@
                 @endif
             @endif
         @endforeach
+
+        <div class="buttons">
+            <button type="button" data-consentpanel="accept">Accept all</button>
+            @php $rejectShown = false; @endphp
+            @foreach ($data['cookie_groups'] as $group)
+                @if (!$rejectShown && $group['enabled'] && $group['show_toggle'])
+            <button type="button" data-consentpanel="select">Accept Selected</button>
+            <button type="button" data-consentpanel="reject">Reject all</button>
+                    @php $rejectShown = true; @endphp
+                @endif
+            @endforeach
+        </div>
 
     </div>
 </div>
