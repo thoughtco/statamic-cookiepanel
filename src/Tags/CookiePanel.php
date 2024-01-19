@@ -69,6 +69,6 @@ class CookiePanel extends Tags
      */
     public function hasConsentedTo()
     {
-        return '<template data-cookiepanel-consent-type="'.$this->params->get('type', 'functional').'" data-cookiepanel="'.uniqid().'">'.$this->parse().'</template>';
+        return '<template data-consentpanel-type="'.$this->params->get('type', 'functional').'" data-consentpanel-id="'.uniqid().'">'.$this->parse().'</template>';
     }
 }
