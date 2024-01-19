@@ -14,16 +14,16 @@ window.addEventListener('DOMContentLoaded', () => {
             let selectedCategories = localStorage.getItem('consent_settings')?.split(',');
 
             [].forEach.call(this.panelElement.querySelectorAll('input[type="checkbox"]'), (el) => {
-                if (selectedCategories.includes(el.value)) {
+                if (selectedCategories && selectedCategories.includes(el.value)) {
                     el.checked = true;
                 }
             });
 
-            if (! selectedCategories.length) {
+            if (! selectedCategories) {
                 this.panelElement.classList.add('open');
             }
 
-            if (! selectedCategories.includes('functional')) {
+            if (selectedCategories && ! selectedCategories.includes('functional')) {
                 selectedCategories.push('functional');
             }
 
@@ -32,14 +32,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
         clickAndInputHandler (event) {
 
-			let target = event.target;
+            let target = event.target;
 
             // if we are a checkbox
             if (target.closest('.toggler')) {
                 return;
             }
 
-            let categoryEls = this.panelElement.querySelectorAll('input[type="checkbox"]');
+            let categoryEls = this.querySelectorAll('input[type="checkbox"]');
 
             let attr = target.getAttribute('data-consentpanel');
             if (!attr) {
@@ -49,12 +49,12 @@ window.addEventListener('DOMContentLoaded', () => {
             let autoClose = false;
             switch (attr) {
                 case 'open':
-                    this.panelElement.classList.add('open');
+                    this.classList.add('open');
                     return;
                 break;
 
                 case 'close':
-                    this.panelElement.classList.remove('open');
+                    this.classList.remove('open');
                 break;
 
                 case 'reject':
@@ -82,7 +82,7 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('consent_settings', selectedCategories.join(','));
 
             if (autoClose) {
-                this.panelElement.classList.remove('open');
+                this.classList.remove('open');
             }
 
             window.dispatchEvent(new CustomEvent('statamic-consentpanel:consent-changed', {
