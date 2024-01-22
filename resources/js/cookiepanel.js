@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         }
 
                         for (const child of fragment.children) {
-                            child.setAttribute('data-consentpanel-ouput', id);
+                            child.setAttribute('data-consentpanel-output', id);
                         }
 
                         el.parentNode.appendChild(fragment);
