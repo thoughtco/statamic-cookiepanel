@@ -27,13 +27,6 @@ class ServiceProvider extends AddonServiceProvider
     {
         parent::boot();
 
-        // handle the posting of the cookie
-        Statamic::booted(function () {
-            $this->registerActionRoutes(function () {
-                Route::post('/', [CookiePanelController::class, 'index']);
-            });
-        });
-
         // after install we need to copy our global
         Statamic::afterInstalled(function ($command) {
 
