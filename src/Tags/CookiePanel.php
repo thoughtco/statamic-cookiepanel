@@ -35,7 +35,7 @@ class CookiePanel extends Tags
      */
     public function styles()
     {
-        return '<link rel="stylesheet" href="/vendor/statamic-cookiepanel/css/cookiepanel.css">';
+        return '<link rel="stylesheet" type="text/css" href="/vendor/statamic-cookiepanel/css/cookiepanel.css" media="screen">';
     }
 
     /**
