@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
             });
 
             if (! selectedCategories.length) {
-                this.panelElement.classList.add('open');
+                this.open();
             }
 
             if (! selectedCategories.includes('functional')) {
@@ -45,12 +45,12 @@ window.addEventListener('DOMContentLoaded', () => {
             let autoClose = false;
             switch (attr) {
                 case 'open':
-                    this.panelElement.classList.add('open');
+                    this.open();
                     return;
                 break;
 
                 case 'close':
-                    this.panelElement.classList.remove('open');
+                    this.close();
                     return;
                 break;
 
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('consent_settings', selectedCategories.join(','));
 
             if (autoClose) {
-                this.panelElement.classList.remove('open');
+                this.close();
             }
 
             this.updateScriptConsent(selectedCategories);
@@ -97,12 +97,20 @@ window.addEventListener('DOMContentLoaded', () => {
             }));
         }
 
+        close() {
+            this.panelElement.classList.remove('open');
+        }
+
         getConsentSettings() {
             return localStorage.getItem('consent_settings')?.split(',') ?? [];
         }
 
         hasConsentedTo(category) {
             return this.getConsentSettings().includes(category);
+        }
+
+        open() {
+            this.panelElement.classList.add('open');
         }
 
         updateScriptConsent(categories) {
