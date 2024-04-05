@@ -1,5 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
-
+(() => {
     const ConsentPanel = class {
         constructor(el) {
             if (! el) {
@@ -155,4 +154,4 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     window.ConsentPanel = new ConsentPanel(document.querySelector('.thoughtco-cookiepanel'));
-});
+})();
