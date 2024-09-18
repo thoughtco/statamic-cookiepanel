@@ -81,11 +81,17 @@
                 }
             }
 
-            localStorage.setItem('consent_settings', selectedCategories.join(','));
+            updateConsentSettings(selectedCategories);
 
             if (autoClose) {
                 this.close();
             }
+
+        }
+
+        updateConsentSettings(selectedCategories) {
+
+            localStorage.setItem('consent_settings', selectedCategories.join(','));
 
             this.updateScriptConsent(selectedCategories);
 
