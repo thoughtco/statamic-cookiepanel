@@ -31,16 +31,16 @@ Add the following files to your site's layout, they are needed to make the other
 
 ### Check if consent has been given
 Wrap any libraries that set cookies inside this tag:
-`{{ if {cookie_panel:has_consented_to type="group-name"} }}`
+`{{ cookie_panel:has_consented_to type="group-name" }}`
 
 e.g 
 
 ```
-{{ if {cookie_panel:has_consented_to type="analytics"} }}
+{{ cookie_panel:has_consented_to type="analytics" }}
 	<!-- Google Tag Manager -->
 	<script>Bad stuff here</script>
 	<!-- End Google Tag Manager -->		
-{{ /if }}
+{{ /cookie_panel:has_consented_to }}
 ```
 
 ### Ouput the Cookie Panel
