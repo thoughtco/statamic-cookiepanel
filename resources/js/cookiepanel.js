@@ -81,7 +81,7 @@
                 }
             }
 
-            updateConsentSettings(selectedCategories);
+            this.updateConsentSettings(selectedCategories);
 
             if (autoClose) {
                 this.close();
