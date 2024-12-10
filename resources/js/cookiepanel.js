@@ -18,7 +18,7 @@
                 }
             });
 
-            if (! selectedCategories.length) {
+            if (! selectedCategories.length && ! this.panelElement.getAttribute('data-preventopen')) {
                 this.open();
             }
 
