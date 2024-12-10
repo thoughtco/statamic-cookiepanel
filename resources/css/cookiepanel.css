@@ -31,7 +31,6 @@
     padding: 40px;
     line-height: 1.3;
     font-size: 0.9rem;
-    transition: 300ms ease-in-out all;
     margin-left: -100%;
     height: 100%;
     overflow-y: auto;
@@ -147,7 +146,6 @@
     top: 3px;
     left: 3px;
     background-color: rgb(40, 40, 40);
-    transition: 300ms ease-in-out all;
 }
 
 .thoughtco-cookiepanel .toggler input:checked + label::before {
