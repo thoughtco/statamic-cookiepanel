@@ -43,7 +43,18 @@ e.g
 {{ /cookie_panel:has_consented_to }}
 ```
 
-### Ouput the Cookie Panel
+### Check if consent has not been given
+Wrap any libraries that set cookies inside this tag:
+`{{ cookie_panel:has_not_consented_to type="group-name" }}`
+
+e.g
+
+```
+{{ cookie_panel:has_not_consented_to type="analytics" }}
+	<p>Analytics not enabled</p>
+{{ /cookie_panel:has_not_consented_to }}
+
+### Output the Cookie Panel
 To display a cookie consent panel to the end user add:
 ```
 {{ cookie_panel:panel }}
