@@ -71,4 +71,14 @@ class CookiePanel extends Tags
     {
         return '<template data-consentpanel-type="'.$this->params->get('type', 'functional').'" data-consentpanel-id="'.uniqid().'">'.$this->parse().'</template>';
     }
+
+    /**
+     * The {{ cookie_panel:has_not_consented_to }} tag.
+     *
+     * @return boolen
+     */
+    public function hasNotConsentedTo()
+    {
+        return '<template data-consentpanel-type="!'.$this->params->get('type', 'functional').'" data-consentpanel-id="'.uniqid().'">'.$this->parse().'</template>';
+    }
 }

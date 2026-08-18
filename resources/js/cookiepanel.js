@@ -126,8 +126,15 @@
                     return;
                 }
 
+                let type = el.getAttribute('data-consentpanel-type');
+                let comparator = type.substring(0, 1) !== '!';
+
+                if (! comparator) {
+                    type = type.substring(1);
+                }
+
                 // consented
-                if (categories.includes(el.getAttribute('data-consentpanel-type'))) {
+                if (categories.includes(type) === comparator) {
                     if (! document.querySelector('[data-consentpanel-output="' + id + '"]')) {
                         let div = document.createElement('div');
                         div.innerHTML = el.innerHTML;
