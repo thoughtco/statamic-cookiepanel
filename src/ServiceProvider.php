@@ -15,12 +15,9 @@ class ServiceProvider extends AddonServiceProvider
         Tags\CookiePanel::class,
     ];
 
-    protected $scripts = [
-        __DIR__.'/../resources/js/cookiepanel.js'
-    ];
-
-    protected $stylesheets = [
-        __DIR__.'/../resources/css/cookiepanel.css'
+    protected $publishables = [
+        __DIR__.'/../resources/js/cookiepanel.js' => 'js/cookiepanel.js',
+        __DIR__.'/../resources/css/cookiepanel.css' => 'css/cookiepanel.css',
     ];
 
     public function boot()
